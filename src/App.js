@@ -29,7 +29,7 @@ function App() {
       );
       console.log(user);
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
 
@@ -94,7 +94,7 @@ function App() {
           <input
             className="form-control"
             type={passwordShown ? "text" : "password"}
-            placeholder="Password"
+            placeholder="Password (Atleast 6 char long)"
             onChange={(event) => {
               setRegisterPassword(event.target.value);
             }}

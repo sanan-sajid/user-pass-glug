@@ -14,6 +14,7 @@ function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [user, setUser] = useState({});
+  
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -41,10 +42,11 @@ function App() {
         loginPassword
       );
       console.log(user);
+      setError("Successfully Logined");
     } catch (error) {
       console.log(error.message);
-      setError(error.message);
-      alert("email or password is incorrect");
+      setError("Email or Password is incorrect");
+      // alert("email or password is incorrect");
     }
     
   };
@@ -55,6 +57,7 @@ function App() {
   const logoutmain = () => {
     logout();
     clearinput();
+    setError("");
   };
   const logout = async () => {
     await signOut(auth);
@@ -120,7 +123,7 @@ function App() {
               setLoginPassword(event.target.value);
             }}
           />
-
+{error && <p>{error} </p>}
           <button onClick={login} className="btn btn-primary">
             {" "}
             Login
@@ -140,7 +143,7 @@ function App() {
         Show/Hide Password
       </label>
       <br></br>
-      {error && <p>{error}</p>}
+      {/* {error && <p>{error}</p>} */}
       <h4> User Logged In: </h4>
       {user ? user.email : "Not Logged In"}
 

@@ -14,7 +14,6 @@ function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [user, setUser] = useState({});
-  
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -46,9 +45,7 @@ function App() {
     } catch (error) {
       console.log(error.message);
       setError("Email or Password is incorrect");
-      // alert("email or password is incorrect");
     }
-    
   };
   const clearinput = () => {
     setLoginEmail("");
@@ -70,13 +67,18 @@ function App() {
 
   return (
     <div className="App">
-  <nav class="navbar navbar-light bg-dark">
-  
-  <a class="navbar-brand" href="#home">
-    <img src="https://miro.medium.com/max/1400/1*0k_-eyWyc_fQztDqck39lQ.png" width="40" height="40" class="d-inline-block align-top" alt=""/>
-    <span className="test">User Password</span> 
-  </a>
-</nav>
+      <nav class="navbar navbar-light bg-dark">
+        <a class="navbar-brand" href="#home">
+          <img
+            src="https://miro.medium.com/max/1400/1*0k_-eyWyc_fQztDqck39lQ.png"
+            width="40"
+            height="40"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          <span className="test">User Password</span>
+        </a>
+      </nav>
       <div className="row">
         <div className="col">
           <h3> Register Here </h3>
@@ -109,6 +111,7 @@ function App() {
           <label>Registered Email:</label>
           <input
             placeholder="Email"
+            value={loginEmail}
             className="form-control"
             onChange={(event) => {
               setLoginEmail(event.target.value);
@@ -117,20 +120,21 @@ function App() {
           <label>Password:</label>
           <input
             placeholder="Password"
+            value={loginPassword}
             className="form-control"
             type={passwordShown ? "text" : "password"}
             onChange={(event) => {
               setLoginPassword(event.target.value);
             }}
           />
-{error && <p>{error} </p>}
+          {error && <p>{error} </p>}
           <button onClick={login} className="btn btn-primary">
             {" "}
             Login
           </button>
         </div>
       </div>
-      
+
       <input
         type="checkbox"
         className="btn-check"
@@ -138,12 +142,12 @@ function App() {
         autocomplete="off"
         onChange={togglePassword}
       />
-      
+
       <label className="btn btn-outline-primary" for="btn-check-outlined">
         Show/Hide Password
       </label>
       <br></br>
-      {/* {error && <p>{error}</p>} */}
+
       <h4> User Logged In: </h4>
       {user ? user.email : "Not Logged In"}
 

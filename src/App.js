@@ -7,7 +7,6 @@ import {
 } from "firebase/auth";
 import "./App.css";
 import { auth } from "./firebase-config";
-import { CSSTransition } from 'react-transition-group';
 
 function App() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -44,8 +43,10 @@ function App() {
       console.log(user);
     } catch (error) {
       console.log(error.message);
+      setError(error.message);
       alert("email or password is incorrect");
     }
+    
   };
   const clearinput = () => {
     setLoginEmail("");
@@ -59,14 +60,20 @@ function App() {
     await signOut(auth);
   };
   const [passwordShown, setPasswordShown] = useState(false);
-
+  const [error, setError] = useState(null);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
   return (
     <div className="App">
-      
+  <nav class="navbar navbar-light bg-dark">
+  
+  <a class="navbar-brand" href="#home">
+    <img src="https://miro.medium.com/max/1400/1*0k_-eyWyc_fQztDqck39lQ.png" width="40" height="40" class="d-inline-block align-top" alt=""/>
+    <span className="test">User Password</span> 
+  </a>
+</nav>
       <div className="row">
         <div className="col">
           <h3> Register Here </h3>
@@ -128,11 +135,12 @@ function App() {
         autocomplete="off"
         onChange={togglePassword}
       />
+      
       <label className="btn btn-outline-primary" for="btn-check-outlined">
         Show/Hide Password
       </label>
       <br></br>
-
+      {error && <p>{error}</p>}
       <h4> User Logged In: </h4>
       {user ? user.email : "Not Logged In"}
 
